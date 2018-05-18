@@ -14,9 +14,9 @@ public class Cliente {
     private static int i=1;
     private String nome;
     private String cpf;
-    private String email;
     private String rg;
     private char sexo;
+    private String email;
     private String telefone;
     
 
