@@ -5,6 +5,12 @@
  */
 package gui;
 
+import classes.Cliente;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import listas.ClienteLista;
+
 /**
  *
  * @author Danilo Abreu
@@ -14,8 +20,12 @@ public class ClienteJanela extends javax.swing.JFrame {
     /**
      * Creates new form ClienteJanela
      */
+    private ClienteLista lista;
+    private static List<Cliente> lc;
+
     public ClienteJanela() {
         initComponents();
+        lista = new ClienteLista();
     }
 
     /**
@@ -54,6 +64,9 @@ public class ClienteJanela extends javax.swing.JFrame {
         cancelarBT = new javax.swing.JButton();
         fecharBT = new javax.swing.JButton();
         salvarBT = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaCliente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cliente");
@@ -110,6 +123,11 @@ public class ClienteJanela extends javax.swing.JFrame {
         jLabel5.setText("CPF");
 
         campoCPF.setEditable(false);
+        try {
+            campoCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.####.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Sexo"));
 
@@ -195,6 +213,11 @@ public class ClienteJanela extends javax.swing.JFrame {
         jLabel7.setText("Telefone");
 
         campoTel.setEditable(false);
+        try {
+            campoTel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -237,12 +260,22 @@ public class ClienteJanela extends javax.swing.JFrame {
 
         editarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Female-user-edit-icon.png"))); // NOI18N
         editarBT.setEnabled(false);
+        editarBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarBTActionPerformed(evt);
+            }
+        });
 
         removerBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actions-list-remove-user-icon.png"))); // NOI18N
         removerBT.setEnabled(false);
 
         cancelarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sign-delete-icon.png"))); // NOI18N
         cancelarBT.setEnabled(false);
+        cancelarBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarBTActionPerformed(evt);
+            }
+        });
 
         fecharBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Windows-Close-Program-icon.png"))); // NOI18N
         fecharBT.addActionListener(new java.awt.event.ActionListener() {
@@ -253,6 +286,11 @@ public class ClienteJanela extends javax.swing.JFrame {
 
         salvarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Devices-media-floppy-icon.png"))); // NOI18N
         salvarBT.setEnabled(false);
+        salvarBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarBTActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -290,6 +328,39 @@ public class ClienteJanela extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tabelaCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "CPF", "RG", "Sexo", "E-mail", "Telefone"
+            }
+        ));
+        tabelaCliente.getTableHeader().setReorderingAllowed(false);
+        tabelaCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaClienteMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaCliente);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(288, 288, 288))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -297,6 +368,7 @@ public class ClienteJanela extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,15 +382,17 @@ public class ClienteJanela extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 199, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -329,7 +403,7 @@ public class ClienteJanela extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_fecharBTActionPerformed
 
-    private void habilitarCampos(){
+    private void habilitarCampos() {
         campoNome.setEditable(true);
         campoCPF.setEditable(true);
         campoRG.setEditable(true);
@@ -338,7 +412,37 @@ public class ClienteJanela extends javax.swing.JFrame {
         campoEmail.setEditable(true);
         campoTel.setEditable(true);
     }
-    
+
+    private void desabilitarCampos() {
+        campoNome.setEditable(false);
+        campoCPF.setEditable(false);
+        campoRG.setEditable(false);
+        radioFem.setEnabled(false);
+        radioMas.setEnabled(false);
+        campoEmail.setEditable(false);
+        campoTel.setEditable(false);
+    }
+
+    private void limparCampos() {
+        campoNome.setText("");
+        campoCPF.setText("");
+        campoRG.setText("");
+        radioFem.setSelected(false);
+        radioMas.setSelected(false);
+        campoEmail.setText("");
+        campoTel.setText("");
+        campoID.setText("");
+    }
+
+    void preencherTabela() {
+        DefaultTableModel model = (DefaultTableModel) tabelaCliente.getModel();
+        model.setNumRows(0);
+        lc = lista.retornarLista();
+        for (Cliente c : lc) {
+            model.addRow(new Object[]{c.getId(), c.getNome(), c.getCpf(), c.getRg(), c.getSexo(), c.getEmail(), c.getTelefone()});
+        }
+
+    }
     private void novoBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoBTActionPerformed
         // TODO add your handling code here:
         habilitarCampos();
@@ -346,6 +450,99 @@ public class ClienteJanela extends javax.swing.JFrame {
         salvarBT.setEnabled(true);
         cancelarBT.setEnabled(true);
     }//GEN-LAST:event_novoBTActionPerformed
+
+    private void cancelarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBTActionPerformed
+        // TODO add your handling code here:
+        desabilitarCampos();
+        cancelarBT.setEnabled(false);
+        salvarBT.setEnabled(false);
+        novoBT.setEnabled(true);
+        editarBT.setEnabled(false);
+        limparCampos();
+    }//GEN-LAST:event_cancelarBTActionPerformed
+
+    private void salvarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarBTActionPerformed
+        // TODO add your handling code here:
+
+        Cliente c = new Cliente();
+
+        String nome = campoNome.getText();
+        String cpf = campoCPF.getText();
+        String email = campoEmail.getText();
+        String rg = campoRG.getText();
+        char sexo = 'F';
+        if (radioMas.isSelected()) {
+            sexo = 'M';
+        }
+        String telefone = campoTel.getText();
+
+        c.setNome(nome);
+        c.setCpf(cpf);
+        c.setRg(rg);
+        c.setSexo(sexo);
+        c.setEmail(email);
+        c.setTelefone(telefone);
+
+        boolean b = lista.addCliente(c);
+
+        novoBT.setEnabled(true);
+        salvarBT.setEnabled(false);
+        cancelarBT.setEnabled(false);
+
+        desabilitarCampos();
+        limparCampos();
+        JOptionPane.showMessageDialog(this, b ? "Salvo" : "nao salvo", "Salvo", JOptionPane.INFORMATION_MESSAGE);
+        preencherTabela();
+    }//GEN-LAST:event_salvarBTActionPerformed
+
+    private void tabelaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClienteMouseClicked
+        // TODO add your handling code here:
+
+        habilitarCampos();
+
+        int linha = tabelaCliente.getSelectedRow();
+
+        campoID.setText(tabelaCliente.getValueAt(linha, 0).toString());
+        campoNome.setText(tabelaCliente.getValueAt(linha, 1).toString());
+        campoRG.setText(tabelaCliente.getValueAt(linha, 3).toString());
+        campoCPF.setText(tabelaCliente.getValueAt(linha, 2).toString());
+        campoEmail.setText(tabelaCliente.getValueAt(linha, 5).toString());
+        campoTel.setText(tabelaCliente.getValueAt(linha, 6).toString());
+
+        if ((tabelaCliente.getValueAt(linha, 4).toString()).charAt(0) == 'F') {
+            radioFem.setSelected(true);
+        } else {
+            radioMas.setSelected(true);
+        }
+        editarBT.setEnabled(true);
+        cancelarBT.setEnabled(true);
+
+    }//GEN-LAST:event_tabelaClienteMouseClicked
+
+    private void editarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBTActionPerformed
+        // TODO add your handling code here
+        habilitarCampos();
+
+        int indice = Integer.parseInt(campoID.getText());
+
+        String nome = campoNome.getText();
+        String cpf = campoCPF.getText();
+        String email = campoEmail.getText();
+        String rg = campoRG.getText();
+        char sexo = 'F';
+        if (radioMas.isSelected()) {
+            sexo = 'M';
+        }
+        String telefone = campoTel.getText();
+        
+        lista.editCliente(indice - 1, nome, cpf, rg, email, sexo, telefone);
+        preencherTabela();
+        editarBT.setEnabled(false);
+        cancelarBT.setEnabled(false);
+        limparCampos();
+        desabilitarCampos();
+
+    }//GEN-LAST:event_editarBTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,11 +601,14 @@ public class ClienteJanela extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton novoBT;
     private javax.swing.JRadioButton radioFem;
     private javax.swing.JRadioButton radioMas;
     private javax.swing.JButton removerBT;
     private javax.swing.JButton salvarBT;
     private javax.swing.ButtonGroup sexoRadio;
+    private javax.swing.JTable tabelaCliente;
     // End of variables declaration//GEN-END:variables
 }
