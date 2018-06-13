@@ -5,7 +5,6 @@
  */
 package gui;
 
-
 import fileModel.Arquivos;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -21,14 +20,17 @@ public class InicialGUI extends javax.swing.JFrame {
      */
     private static InicialGUI janelaIncial;
     Arquivos arqf;
+
     public InicialGUI() {
         initComponents();
         arqf = new Arquivos("cliente");
     }
-    static{
+
+    static {
         janelaIncial = new InicialGUI();
     }
-    public static InicialGUI getInstance(){
+
+    public static InicialGUI getInstance() {
         return janelaIncial;
     }
 
@@ -260,17 +262,16 @@ public class InicialGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    
+
+
     private void novoBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoBTActionPerformed
         // TODO add your handling code here:
-        new ClienteNovoGUI(null,true).setVisible(true);
-        
+        new ClienteNovoGUI(null, true).setVisible(true);
+
     }//GEN-LAST:event_novoBTActionPerformed
-    public void sair(){
-       int op = JOptionPane.showConfirmDialog(null, "Deseja Sair", "Sair do Sistema", JOptionPane.YES_NO_OPTION);
-        if(op == JOptionPane.YES_OPTION){
+    public void sair() {
+        int op = JOptionPane.showConfirmDialog(null, "Deseja Sair", "Sair do Sistema", JOptionPane.YES_NO_OPTION);
+        if (op == JOptionPane.YES_OPTION) {
             dispose();
             LoginGUI.getInstance().setVisible(true);
         }
@@ -287,18 +288,18 @@ public class InicialGUI extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        new ClienteNovoGUI(null,true).setVisible(true);
-        
+        new ClienteNovoGUI(null, true).setVisible(true);
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        new UsuarioGUI(null,true).setVisible(true);
+        new UsuarioGUI(null, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void sairBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairBTActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Fechando...");
+        JOptionPane.showMessageDialog(this, "Até mais...", "Encerrando", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
     }//GEN-LAST:event_sairBTActionPerformed
 
@@ -309,18 +310,18 @@ public class InicialGUI extends javax.swing.JFrame {
 
     private void editarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBTActionPerformed
         // TODO add your handling code here:
-       new ClienteGUI(null, true).setVisible(true);
+        new ClienteGUI(null, true).setVisible(true);
     }//GEN-LAST:event_editarBTActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Fechando...");
+        JOptionPane.showMessageDialog(this, "Até mais...", "Encerrando", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        new ListarUsuarioGUI(null,true).setVisible(true);
+        new ListarUsuarioGUI(null, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -330,12 +331,12 @@ public class InicialGUI extends javax.swing.JFrame {
 
     private void removerBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerBTActionPerformed
         // TODO add your handling code here:
-        new RemoverClientesGUI(null,true).setVisible(true);
+        new RemoverClientesGUI(null, true).setVisible(true);
     }//GEN-LAST:event_removerBTActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-        new ListarClientesGUI(null,true).setVisible(true);
+        new ListarClientesGUI(null, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
