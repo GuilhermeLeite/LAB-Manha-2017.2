@@ -1,0 +1,4 @@
+Programa de manipulação de arquivos desenvolvido nas aulas dos dias:
+23/05/2018
+08/06/2018
+13/06/2018
