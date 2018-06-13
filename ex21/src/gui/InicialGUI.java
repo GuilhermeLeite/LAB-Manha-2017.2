@@ -215,6 +215,11 @@ public class InicialGUI extends javax.swing.JFrame {
 
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Male-user-edit-icon-Small.png"))); // NOI18N
         jMenuItem7.setText("Clientes");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem7);
 
         jMenuBar1.add(jMenu2);
@@ -285,7 +290,7 @@ public class InicialGUI extends javax.swing.JFrame {
 
     private void editarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBTActionPerformed
         // TODO add your handling code here:
-        ClienteGUI.getInstance().setVisible(true);
+       new ClienteGUI(null, true).setVisible(true);
     }//GEN-LAST:event_editarBTActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -308,6 +313,11 @@ public class InicialGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         RemoverClientesGUI.getInstance().setVisible(true);
     }//GEN-LAST:event_removerBTActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        ListarClientesGUI.getInstance().setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -76,7 +76,7 @@ public class RemoverClientesGUI extends javax.swing.JDialog {
         removetBT = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Lista de Clientes");
+        setTitle("Remover Clientes");
         setIconImage(new ImageIcon("D:\\Google Drive\\Trabalho\\UEPB\\2017-2\\Lab\\Códigos\\ex21\\src\\img\\data-management-icon.png").getImage()
         );
 

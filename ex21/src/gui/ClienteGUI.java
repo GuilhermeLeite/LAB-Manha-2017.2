@@ -26,7 +26,6 @@ public class ClienteGUI extends javax.swing.JDialog {
     Arquivos arq;
     List<String> lista;
     private static int id = 0;
-    private static ClienteGUI cj;
     private Cliente c;
     
 
@@ -37,13 +36,7 @@ public class ClienteGUI extends javax.swing.JDialog {
         preencherTabela();
     }
 
-    static {
-        cj = new ClienteGUI(null, true);
-    }
-
-    public static ClienteGUI getInstance() {
-        return cj;
-    }
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.

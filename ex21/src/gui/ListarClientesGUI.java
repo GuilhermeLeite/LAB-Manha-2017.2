@@ -37,6 +37,7 @@ public class ListarClientesGUI extends javax.swing.JDialog {
     }
 
     public static ListarClientesGUI getInstance() {
+        lcg.preencherTabela();
         return lcg;
     }
 
@@ -70,7 +71,7 @@ public class ListarClientesGUI extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         quantidadeLabel = new javax.swing.JLabel();
         fecharBT = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        editarBT = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Clientes");
@@ -128,11 +129,11 @@ public class ListarClientesGUI extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Female-user-edit-icon.png"))); // NOI18N
-        jButton1.setToolTipText("Editar Cliente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        editarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Female-user-edit-icon.png"))); // NOI18N
+        editarBT.setToolTipText("Editar Cliente");
+        editarBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                editarBTActionPerformed(evt);
             }
         });
 
@@ -146,7 +147,7 @@ public class ListarClientesGUI extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(quantidadeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(editarBT)
                 .addGap(18, 18, 18)
                 .addComponent(fecharBT)
                 .addContainerGap())
@@ -156,7 +157,7 @@ public class ListarClientesGUI extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(editarBT)
                     .addComponent(fecharBT)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -188,11 +189,11 @@ public class ListarClientesGUI extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void editarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBTActionPerformed
         // TODO add your handling code here:
         dispose();
-        ClienteGUI.getInstance().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        new ClienteGUI(null, true).setVisible(true);
+    }//GEN-LAST:event_editarBTActionPerformed
 
     private void fecharBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharBTActionPerformed
         // TODO add your handling code here:
@@ -242,8 +243,8 @@ public class ListarClientesGUI extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton editarBT;
     private javax.swing.JButton fecharBT;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
