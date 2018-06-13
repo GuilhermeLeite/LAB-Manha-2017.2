@@ -211,7 +211,7 @@ public class LoginGUI extends javax.swing.JDialog {
 
     private void loginBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBTActionPerformed
         // TODO add your handling code here:
-        File arquivo = arq.getF();
+        File arquivo = arq.getFile();
 
         lista = arq.lerArquivo(arquivo);
         int t = 0;

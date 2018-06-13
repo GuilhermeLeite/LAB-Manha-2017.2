@@ -43,7 +43,7 @@ public class RemoverClientesGUI extends javax.swing.JDialog {
     }
 
     private void preencherTabela() {
-        File f = arq.getF();
+        File f = arq.getFile();
         lista = arq.lerArquivo(f);
         DefaultTableModel model = (DefaultTableModel) tabelaUsuarios.getModel();
         model.setRowCount(0);
@@ -199,7 +199,7 @@ public class RemoverClientesGUI extends javax.swing.JDialog {
 
     private void removetBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removetBTActionPerformed
         // TODO add your handling code here:
-        File f = arq.getF();
+        File f = arq.getFile();
         lista = arq.lerArquivo(f);
         int linha = tabelaUsuarios.getSelectedRow();
         String campoId = tabelaUsuarios.getValueAt(linha, 0).toString();

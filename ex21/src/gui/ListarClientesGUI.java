@@ -23,7 +23,6 @@ public class ListarClientesGUI extends javax.swing.JDialog {
     Arquivos arq;
     List<String> lista;
 
-    private static ListarClientesGUI lcg;
 
     public ListarClientesGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -32,17 +31,8 @@ public class ListarClientesGUI extends javax.swing.JDialog {
         preencherTabela();
     }
 
-    static {
-        lcg = new ListarClientesGUI(null, true);
-    }
-
-    public static ListarClientesGUI getInstance() {
-        lcg.preencherTabela();
-        return lcg;
-    }
-
     private void preencherTabela() {
-        File f = arq.getF();
+        File f = arq.getFile();
         lista = arq.lerArquivo(f);
         DefaultTableModel model = (DefaultTableModel) tabelaUsuarios.getModel();
         model.setRowCount(0);
@@ -71,7 +61,6 @@ public class ListarClientesGUI extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         quantidadeLabel = new javax.swing.JLabel();
         fecharBT = new javax.swing.JButton();
-        editarBT = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Clientes");
@@ -129,14 +118,6 @@ public class ListarClientesGUI extends javax.swing.JDialog {
             }
         });
 
-        editarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Female-user-edit-icon.png"))); // NOI18N
-        editarBT.setToolTipText("Editar Cliente");
-        editarBT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarBTActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -147,8 +128,6 @@ public class ListarClientesGUI extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(quantidadeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(editarBT)
-                .addGap(18, 18, 18)
                 .addComponent(fecharBT)
                 .addContainerGap())
         );
@@ -157,7 +136,6 @@ public class ListarClientesGUI extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editarBT)
                     .addComponent(fecharBT)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -188,12 +166,6 @@ public class ListarClientesGUI extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void editarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBTActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        new ClienteGUI(null, true).setVisible(true);
-    }//GEN-LAST:event_editarBTActionPerformed
 
     private void fecharBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharBTActionPerformed
         // TODO add your handling code here:
@@ -243,7 +215,6 @@ public class ListarClientesGUI extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton editarBT;
     private javax.swing.JButton fecharBT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

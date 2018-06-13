@@ -9,10 +9,7 @@ import fileModel.Arquivos;
 import java.io.File;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import buffers.BufferUsuario;
-import classes.Usuario;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -173,7 +170,7 @@ public class ListarUsuarioGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_sairBTActionPerformed
     
     private void preencher(){
-        File f = arq.getF();
+        File f = arq.getFile();
         lista=arq.lerArquivo(f);
         DefaultTableModel model = (DefaultTableModel) tabelaUsuario.getModel();
         model.setNumRows(0);

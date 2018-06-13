@@ -244,7 +244,7 @@ public class UsuarioGUI extends javax.swing.JDialog {
 
     private void removerBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerBTActionPerformed
         // TODO add your handling code here:
-        File f = arq.getF();
+        File f = arq.getFile();
         lista=arq.lerArquivo(f);
         if(arq.regravarDados(f, BufferUsuario.apagarUsuario(lista, userCampo.getText()))){
             preencher();
@@ -258,7 +258,7 @@ public class UsuarioGUI extends javax.swing.JDialog {
 
     private void editarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBTActionPerformed
         // TODO add your handling code here:
-        File f = arq.getF();
+        File f = arq.getFile();
         lista=arq.lerArquivo(f);
         String nu = JOptionPane.showInputDialog("Novo usuario");
         String ns = JOptionPane.showInputDialog("Nova Senha");
@@ -281,7 +281,7 @@ public class UsuarioGUI extends javax.swing.JDialog {
     private void novoBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoBtActionPerformed
         // TODO add your handling code here:
         
-        File arquivo = arq.getF();
+        File arquivo = arq.getFile();
         String user = JOptionPane.showInputDialog("Digite o usuario");
         String pass = JOptionPane.showInputDialog("digite a senha");
         Usuario u = new Usuario(user, pass);
@@ -296,7 +296,7 @@ public class UsuarioGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_novoBtActionPerformed
     
     private void preencher(){
-        File f = arq.getF();
+        File f = arq.getFile();
         lista=arq.lerArquivo(f);
         DefaultTableModel model = (DefaultTableModel) tabelaUsuario.getModel();
         model.setNumRows(0);

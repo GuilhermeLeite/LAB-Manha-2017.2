@@ -63,6 +63,8 @@ public class InicialGUI extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro");
@@ -74,7 +76,7 @@ public class InicialGUI extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         novoBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actions-contact-new-icon.png"))); // NOI18N
-        novoBT.setToolTipText("Cadastrar Novo");
+        novoBT.setToolTipText("Cadastrar Novo Cliente");
         novoBT.setFocusable(false);
         novoBT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         novoBT.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -86,7 +88,7 @@ public class InicialGUI extends javax.swing.JFrame {
         jToolBar1.add(novoBT);
 
         exibirBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actions-view-list-details-icon.png"))); // NOI18N
-        exibirBT.setToolTipText("Listar");
+        exibirBT.setToolTipText("Listar Clientes");
         exibirBT.setFocusable(false);
         exibirBT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         exibirBT.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -98,7 +100,7 @@ public class InicialGUI extends javax.swing.JFrame {
         jToolBar1.add(exibirBT);
 
         editarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Male-user-edit-icon.png"))); // NOI18N
-        editarBT.setToolTipText("Editar");
+        editarBT.setToolTipText("Editar Cliente");
         editarBT.setFocusable(false);
         editarBT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         editarBT.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -110,7 +112,7 @@ public class InicialGUI extends javax.swing.JFrame {
         jToolBar1.add(editarBT);
 
         removerBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Male-user-remove-icon.png"))); // NOI18N
-        removerBT.setToolTipText("Remover Usuário");
+        removerBT.setToolTipText("Remover Cliente");
         removerBT.setFocusable(false);
         removerBT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         removerBT.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -145,6 +147,7 @@ public class InicialGUI extends javax.swing.JFrame {
         });
         jToolBar1.add(sairBT);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Documents-icon.png"))); // NOI18N
         jMenu1.setText("Arquivo");
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actions-edit-add-icon.png"))); // NOI18N
@@ -178,6 +181,7 @@ public class InicialGUI extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Settings-icon.png"))); // NOI18N
         jMenu3.setText("Administrar");
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/User-Administrator-Red-icon.png"))); // NOI18N
@@ -201,6 +205,7 @@ public class InicialGUI extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actions-view-list-icons-icon.png"))); // NOI18N
         jMenu2.setText("Exibir");
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/User-Administrator-Red-icon.png"))); // NOI18N
@@ -224,6 +229,20 @@ public class InicialGUI extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sign-question-icon.png"))); // NOI18N
+        jMenu4.setText("Ajuda");
+
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actions-help-about-icon.png"))); // NOI18N
+        jMenuItem8.setText("Sobre");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,7 +265,7 @@ public class InicialGUI extends javax.swing.JFrame {
     
     private void novoBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoBTActionPerformed
         // TODO add your handling code here:
-        ClienteNovoGUI.getInstance().setVisible(true);
+        new ClienteNovoGUI(null,true).setVisible(true);
         
     }//GEN-LAST:event_novoBTActionPerformed
     public void sair(){
@@ -268,13 +287,13 @@ public class InicialGUI extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        ClienteNovoGUI.getInstance().setVisible(true);
+        new ClienteNovoGUI(null,true).setVisible(true);
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        UsuarioGUI.getInstance().setVisible(true);
+        new UsuarioGUI(null,true).setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void sairBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairBTActionPerformed
@@ -285,7 +304,7 @@ public class InicialGUI extends javax.swing.JFrame {
 
     private void exibirBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exibirBTActionPerformed
         // TODO add your handling code here:
-        ListarClientesGUI.getInstance().setVisible(true);
+        new ListarClientesGUI(null, true).setVisible(true);
     }//GEN-LAST:event_exibirBTActionPerformed
 
     private void editarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBTActionPerformed
@@ -301,23 +320,28 @@ public class InicialGUI extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        ListarUsuarioGUI.getInstance().setVisible(true);
+        new ListarUsuarioGUI(null,true).setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        ListarUsuarioGUI.getInstance().setVisible(true);
+        new ClienteGUI(null, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void removerBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerBTActionPerformed
         // TODO add your handling code here:
-        RemoverClientesGUI.getInstance().setVisible(true);
+        new RemoverClientesGUI(null,true).setVisible(true);
     }//GEN-LAST:event_removerBTActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-        ListarClientesGUI.getInstance().setVisible(true);
+        new ListarClientesGUI(null,true).setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        Sobre.getInstance().setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,6 +387,7 @@ public class InicialGUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -371,6 +396,7 @@ public class InicialGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;

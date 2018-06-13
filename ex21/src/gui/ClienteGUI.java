@@ -453,7 +453,7 @@ public class ClienteGUI extends javax.swing.JDialog {
     }
 
     private void preencherTabela() {
-        File f = arq.getF();
+        File f = arq.getFile();
         lista = arq.lerArquivo(f);
         DefaultTableModel model = (DefaultTableModel) tabelaUsuarios.getModel();
         model.setRowCount(0);
@@ -484,19 +484,19 @@ public class ClienteGUI extends javax.swing.JDialog {
     }
     private void editarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBTActionPerformed
         // TODO add your handling code here:
-
         habilitarCampos();   
         salvarBT.setEnabled(true);
         editarBT.setEnabled(false);
+        removerBT.setEnabled(false);
     }//GEN-LAST:event_editarBTActionPerformed
 
     private void salvarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarBTActionPerformed
         // TODO add your handling code here:
-        File arquivo = arq.getF();
+        File arquivo = arq.getFile();
         lista = arq.lerArquivo(arquivo);
         String nome = campoNome.getText();
         String cpf = campoCPF.getText();
-        String email = campoTelefone.getText();
+        String email = campoEmail.getText();
         String rg = campoRG.getText();
         char sexo = 'F';
         if (radioFem.isSelected()) {
@@ -576,7 +576,7 @@ public class ClienteGUI extends javax.swing.JDialog {
 
     private void removerBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerBTActionPerformed
         // TODO add your handling code here:
-        File f = arq.getF();
+        File f = arq.getFile();
         lista = arq.lerArquivo(f);
 
         if (arq.regravarDados(f, BufferCliente.apagarCliente(lista, campoId.getText()))) {

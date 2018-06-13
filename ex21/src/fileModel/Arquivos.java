@@ -34,7 +34,7 @@ public class Arquivos {
         }
     }
 
-    public File getF() {
+    public File getFile() {
         return f;
     }
 

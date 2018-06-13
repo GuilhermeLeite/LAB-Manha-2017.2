@@ -33,7 +33,7 @@ public class ClienteNovoGUI extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         arq = new Arquivos("cliente");
-        arquivo = arq.getF();
+        arquivo = arq.getFile();
         lista = arq.lerArquivo(arquivo);
         campoId.setText(String.valueOf(BufferCliente.idNovoUsuario(lista)));
         radioFem.setSelected(true);
@@ -83,7 +83,7 @@ public class ClienteNovoGUI extends javax.swing.JDialog {
         fecharBT = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Clientes");
+        setTitle("Novo Cliente");
         setIconImage(new ImageIcon("D:\\Google Drive\\Trabalho\\UEPB\\2017-2\\Lab\\Códigos\\ex21\\src\\img\\data-management-icon.png").getImage()
         );
 
@@ -355,7 +355,7 @@ public class ClienteNovoGUI extends javax.swing.JDialog {
         
         String nome = campoNome.getText();
         String cpf = campoCPF.getText();
-        String email = campoTelefone.getText();
+        String email = campoEmail.getText();
         String rg = campoRG.getText();
         char sexo = 'F';
         if (radioFem.isSelected()) {
@@ -381,7 +381,7 @@ public class ClienteNovoGUI extends javax.swing.JDialog {
             if (arq.novoDado(arquivo, c.toString())) {
                 JOptionPane.showMessageDialog(this, "Salvo", "Novo usuario", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
-                ListarClientesGUI.getInstance().setVisible(true);
+                new ListarClientesGUI(null,true).setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Falha", "Novo usuario", JOptionPane.ERROR_MESSAGE);
             }
