@@ -5,10 +5,11 @@
  */
 package gui;
 
-import File.Arquivos;
+import fileModel.Arquivos;
 import buffers.BufferUsuario;
 import java.io.File;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +25,7 @@ public class LoginGUI extends javax.swing.JDialog {
     List lista;
 
     private static LoginGUI janela;
+    
     public LoginGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -58,6 +60,9 @@ public class LoginGUI extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new ImageIcon("D:\\Google Drive\\Trabalho\\UEPB\\2017-2\\Lab\\Códigos\\ex21\\src\\img\\data-management-icon.png").getImage()
+        );
+        setUndecorated(true);
 
         jLabel1.setText("Usuário");
 
@@ -213,17 +218,17 @@ public class LoginGUI extends javax.swing.JDialog {
         String user = usuario.getText();
         String pass = new String(senha.getPassword());
         if (BufferUsuario.login(lista, user, pass)) {
-            JOptionPane.showMessageDialog(null, "Login", "Login ok", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bem-vindo", "Login", JOptionPane.INFORMATION_MESSAGE);
             dispose();
             new InicialGUI().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Login fail", "Nao deu", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Falha de acesso", "Login", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loginBTActionPerformed
 
     private void listarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarBTActionPerformed
         // TODO add your handling code here:
-        new UsuarioGUI(null, true).setVisible(true);
+        UsuarioGUI.getInstance().setVisible(true);
     }//GEN-LAST:event_listarBTActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

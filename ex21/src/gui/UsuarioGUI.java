@@ -5,13 +5,13 @@
  */
 package gui;
 
-import File.Arquivos;
+import fileModel.Arquivos;
 import java.io.File;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import buffers.BufferUsuario;
-import classes.Cliente;
 import classes.Usuario;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -64,6 +64,9 @@ public class UsuarioGUI extends javax.swing.JDialog {
         novoBt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Usuários");
+        setIconImage(new ImageIcon("D:\\Google Drive\\Trabalho\\UEPB\\2017-2\\Lab\\Códigos\\ex21\\src\\img\\data-management-icon.png").getImage()
+        );
 
         tabelaUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,14 +110,16 @@ public class UsuarioGUI extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        sairBT.setText("Sair");
+        sairBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Windows-Close-Program-icon.png"))); // NOI18N
+        sairBT.setToolTipText("Sair");
         sairBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sairBTActionPerformed(evt);
             }
         });
 
-        removerBT.setText("Remover");
+        removerBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actions-list-remove-user-icon.png"))); // NOI18N
+        removerBT.setToolTipText("Remover");
         removerBT.setEnabled(false);
         removerBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,7 +135,8 @@ public class UsuarioGUI extends javax.swing.JDialog {
 
         senhaCampo.setEditable(false);
 
-        editarBT.setText("Editar Dados");
+        editarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Female-user-edit-icon.png"))); // NOI18N
+        editarBT.setToolTipText("Editar Dados");
         editarBT.setEnabled(false);
         editarBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +144,8 @@ public class UsuarioGUI extends javax.swing.JDialog {
             }
         });
 
-        novoBt.setText("Novo");
+        novoBt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actions-user-group-new-icon.png"))); // NOI18N
+        novoBt.setToolTipText("Novo");
         novoBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novoBtActionPerformed(evt);
@@ -158,8 +165,9 @@ public class UsuarioGUI extends javax.swing.JDialog {
                         .addComponent(novoBt, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7)
                         .addComponent(removerBT)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editarBT, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editarBT, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -184,18 +192,14 @@ public class UsuarioGUI extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(senhaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sairBT)
-                            .addComponent(removerBT)
-                            .addComponent(novoBt))
-                        .addGap(30, 30, 30))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(editarBT)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(sairBT)
+                        .addComponent(removerBT)
+                        .addComponent(novoBt))
+                    .addComponent(editarBT))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,10 +249,10 @@ public class UsuarioGUI extends javax.swing.JDialog {
         if(arq.regravarDados(f, BufferUsuario.apagarUsuario(lista, userCampo.getText()))){
             preencher();
             removerBT.setEnabled(false);
-            JOptionPane.showMessageDialog(this, "Apagou", "já era", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Usuario Deletado", "Remoção", JOptionPane.INFORMATION_MESSAGE);
             editarBT.setEnabled(false);
         }else{
-            JOptionPane.showMessageDialog(this, "nao apagou","nao deu certo",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Falha na Remoção","Remoção",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_removerBTActionPerformed
 
@@ -262,14 +266,14 @@ public class UsuarioGUI extends javax.swing.JDialog {
             if (arq.regravarDados(f, BufferUsuario.editarUsuario(lista, userCampo.getText(), nu, ns))) {
                 preencher();
                 removerBT.setEnabled(false);
-                JOptionPane.showMessageDialog(this, "alterou", "Opa", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Usuário Alterado", "Alteração", JOptionPane.INFORMATION_MESSAGE);
                 editarBT.setEnabled(false);
                 preencher();
             } else {
-                JOptionPane.showMessageDialog(this, "nao editou", "nao deu certo", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Falha na Edição", "Edição", JOptionPane.ERROR_MESSAGE);
             }
         }else{
-            JOptionPane.showMessageDialog(this, "clique no usuario que quer alterar","nao deu",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "clique no usuario que quer alterar","Alerta",JOptionPane.WARNING_MESSAGE);
         }
        
     }//GEN-LAST:event_editarBTActionPerformed

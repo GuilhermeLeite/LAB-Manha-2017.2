@@ -6,7 +6,8 @@
 package gui;
 
 
-import File.Arquivos;
+import fileModel.Arquivos;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,10 +19,17 @@ public class InicialGUI extends javax.swing.JFrame {
     /**
      * Creates new form InicialGUI
      */
+    private static InicialGUI janelaIncial;
     Arquivos arqf;
     public InicialGUI() {
         initComponents();
         arqf = new Arquivos("cliente");
+    }
+    static{
+        janelaIncial = new InicialGUI();
+    }
+    public static InicialGUI getInstance(){
+        return janelaIncial;
     }
 
     /**
@@ -45,13 +53,22 @@ public class InicialGUI extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro");
         setExtendedState(6);
+        setIconImage(new ImageIcon("D:\\Google Drive\\Trabalho\\UEPB\\2017-2\\Lab\\Códigos\\ex21\\src\\img\\data-management-icon.png").getImage()
+        );
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -73,6 +90,11 @@ public class InicialGUI extends javax.swing.JFrame {
         exibirBT.setFocusable(false);
         exibirBT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         exibirBT.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        exibirBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exibirBTActionPerformed(evt);
+            }
+        });
         jToolBar1.add(exibirBT);
 
         editarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Male-user-edit-icon.png"))); // NOI18N
@@ -80,6 +102,11 @@ public class InicialGUI extends javax.swing.JFrame {
         editarBT.setFocusable(false);
         editarBT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         editarBT.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        editarBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarBTActionPerformed(evt);
+            }
+        });
         jToolBar1.add(editarBT);
 
         removerBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Male-user-remove-icon.png"))); // NOI18N
@@ -87,6 +114,11 @@ public class InicialGUI extends javax.swing.JFrame {
         removerBT.setFocusable(false);
         removerBT.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         removerBT.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        removerBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removerBTActionPerformed(evt);
+            }
+        });
         jToolBar1.add(removerBT);
 
         logofBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logout-icon.png"))); // NOI18N
@@ -126,18 +158,29 @@ public class InicialGUI extends javax.swing.JFrame {
         jMenu1.add(jSeparator1);
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logout-iconSmall.png"))); // NOI18N
-        jMenuItem2.setText("Sair");
+        jMenuItem2.setText("Logoff");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem2);
+        jMenu1.add(jSeparator2);
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Windows-Close-Program-icon-Small.png"))); // NOI18N
+        jMenuItem4.setText("Fechar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Administrar");
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/User-Administrator-Red-icon.png"))); // NOI18N
         jMenuItem3.setText("Usuários");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,10 +188,35 @@ public class InicialGUI extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem3);
+        jMenu3.add(jSeparator3);
+
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Male-user-edit-icon-Small.png"))); // NOI18N
+        jMenuItem5.setText("Clientes");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
 
         jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Exibir");
+
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/User-Administrator-Red-icon.png"))); // NOI18N
+        jMenuItem6.setText("Usuários");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
+        jMenu2.add(jSeparator4);
+
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Male-user-edit-icon-Small.png"))); // NOI18N
+        jMenuItem7.setText("Clientes");
+        jMenu2.add(jMenuItem7);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -173,13 +241,14 @@ public class InicialGUI extends javax.swing.JFrame {
     
     private void novoBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoBTActionPerformed
         // TODO add your handling code here:
-        ClienteGUI.getInstance().setVisible(true);
+        ClienteNovoGUI.getInstance().setVisible(true);
+        
     }//GEN-LAST:event_novoBTActionPerformed
     public void sair(){
        int op = JOptionPane.showConfirmDialog(null, "Deseja Sair", "Sair do Sistema", JOptionPane.YES_NO_OPTION);
         if(op == JOptionPane.YES_OPTION){
             dispose();
-            new LoginGUI(this,true).setVisible(true);
+            LoginGUI.getInstance().setVisible(true);
         }
     }
     private void logofBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logofBTActionPerformed
@@ -194,7 +263,7 @@ public class InicialGUI extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        //ClienteJanela.getInstance().setVisible(true);
+        ClienteNovoGUI.getInstance().setVisible(true);
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -208,6 +277,37 @@ public class InicialGUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Fechando...");
         System.exit(0);
     }//GEN-LAST:event_sairBTActionPerformed
+
+    private void exibirBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exibirBTActionPerformed
+        // TODO add your handling code here:
+        ListarClientesGUI.getInstance().setVisible(true);
+    }//GEN-LAST:event_exibirBTActionPerformed
+
+    private void editarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBTActionPerformed
+        // TODO add your handling code here:
+        ClienteGUI.getInstance().setVisible(true);
+    }//GEN-LAST:event_editarBTActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Fechando...");
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        ListarUsuarioGUI.getInstance().setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        ListarUsuarioGUI.getInstance().setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void removerBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerBTActionPerformed
+        // TODO add your handling code here:
+        RemoverClientesGUI.getInstance().setVisible(true);
+    }//GEN-LAST:event_removerBTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,7 +357,14 @@ public class InicialGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton logofBT;
     private javax.swing.JButton novoBT;

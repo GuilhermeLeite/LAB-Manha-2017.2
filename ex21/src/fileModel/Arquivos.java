@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package File;
+package fileModel;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,7 +27,7 @@ public class Arquivos {
 
     public Arquivos(String nome) {
         try {
-            this.f = new File("D:\\Downloads\\" + nome + ".txt");
+            this.f = new File("src/arquivos/" + nome + ".txt");
             this.f.createNewFile();
         } catch (IOException ex) {
             Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);

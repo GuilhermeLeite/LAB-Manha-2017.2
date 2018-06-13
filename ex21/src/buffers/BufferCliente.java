@@ -19,8 +19,9 @@ public class BufferCliente {
         if(t!=0){
             comp = l.get(t-1).split("\\;");
             id= Integer.parseInt(comp[0]);
+            id++;
         } 
-        return id+1;
+        return id;
     }
     
      public static List<String> apagarCliente(List<String> l, String u){      

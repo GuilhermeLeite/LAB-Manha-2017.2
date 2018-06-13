@@ -5,43 +5,46 @@
  */
 package gui;
 
-import fileModel.Arquivos;
 import buffers.BufferCliente;
+import fileModel.Arquivos;
 import classes.Cliente;
 import java.io.File;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Danilo Abreu
  */
-public class ClienteGUI extends javax.swing.JDialog {
+public class ClienteNovoGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form ClienteGUI
      */
     Arquivos arq;
     List<String> lista;
-    private static int id = 0;
-    private static ClienteGUI cj;
-    private Cliente c;
     
+    private static ClienteNovoGUI cj;
+    private Cliente c;
+    private File arquivo;
 
-    public ClienteGUI(java.awt.Frame parent, boolean modal) {
+    public ClienteNovoGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         arq = new Arquivos("cliente");
-        preencherTabela();
+        arquivo = arq.getF();
+        lista = arq.lerArquivo(arquivo);
+        campoId.setText(String.valueOf(BufferCliente.idNovoUsuario(lista)));
+        radioFem.setSelected(true);
+        c= new Cliente(BufferCliente.idNovoUsuario(lista));
     }
 
     static {
-        cj = new ClienteGUI(null, true);
+        cj = new ClienteNovoGUI(null, true);
     }
 
-    public static ClienteGUI getInstance() {
+    public static ClienteNovoGUI getInstance() {
         return cj;
     }
 
@@ -76,14 +79,8 @@ public class ClienteGUI extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         campoTelefone = new javax.swing.JFormattedTextField();
         jPanel6 = new javax.swing.JPanel();
-        editarBT = new javax.swing.JButton();
-        removerBT = new javax.swing.JButton();
         salvarBT = new javax.swing.JButton();
-        cancelarBT = new javax.swing.JButton();
         fecharBT = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaUsuarios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
@@ -132,11 +129,7 @@ public class ClienteGUI extends javax.swing.JDialog {
 
         jLabel3.setText("Nome");
 
-        campoNome.setEditable(false);
-
         jLabel4.setText("RG");
-
-        campoRG.setEditable(false);
 
         jLabel5.setText("CPF");
 
@@ -144,11 +137,9 @@ public class ClienteGUI extends javax.swing.JDialog {
 
         opcaoBotaoGrupo.add(radioFem);
         radioFem.setText("Feminino");
-        radioFem.setEnabled(false);
 
         opcaoBotaoGrupo.add(radioMasc);
         radioMasc.setText("Masculino");
-        radioMasc.setEnabled(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -171,7 +162,6 @@ public class ClienteGUI extends javax.swing.JDialog {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        campoCPF.setEditable(false);
         try {
             campoCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.####-##")));
         } catch (java.text.ParseException ex) {
@@ -224,11 +214,8 @@ public class ClienteGUI extends javax.swing.JDialog {
 
         jLabel6.setText("E-mail");
 
-        campoEmail.setEditable(false);
-
         jLabel7.setText("Telefone");
 
-        campoTelefone.setEditable(false);
         try {
             campoTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
@@ -294,39 +281,11 @@ public class ClienteGUI extends javax.swing.JDialog {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255)));
 
-        editarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Female-user-edit-icon.png"))); // NOI18N
-        editarBT.setToolTipText("Editar Usuário");
-        editarBT.setEnabled(false);
-        editarBT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarBTActionPerformed(evt);
-            }
-        });
-
-        removerBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Actions-list-remove-user-icon.png"))); // NOI18N
-        removerBT.setToolTipText("Remover Usuário");
-        removerBT.setEnabled(false);
-        removerBT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removerBTActionPerformed(evt);
-            }
-        });
-
         salvarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Devices-media-floppy-icon.png"))); // NOI18N
         salvarBT.setToolTipText("Salvar");
-        salvarBT.setEnabled(false);
         salvarBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salvarBTActionPerformed(evt);
-            }
-        });
-
-        cancelarBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sign-delete-icon.png"))); // NOI18N
-        cancelarBT.setToolTipText("Cancelar Ação");
-        cancelarBT.setEnabled(false);
-        cancelarBT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarBTActionPerformed(evt);
             }
         });
 
@@ -342,18 +301,12 @@ public class ClienteGUI extends javax.swing.JDialog {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(editarBT, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removerBT, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(341, 341, 341)
                 .addComponent(salvarBT, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cancelarBT, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(fecharBT, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(197, 197, 197))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,53 +314,8 @@ public class ClienteGUI extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(salvarBT)
-                    .addComponent(editarBT)
-                    .addComponent(removerBT)
-                    .addComponent(cancelarBT)
-                    .addComponent(fecharBT))
+                    .addComponent(fecharBT, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(43, 43, 43))
-        );
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255)));
-
-        tabelaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Nome", "CPF", "RG", "Sexo", "E-mail", "Telefone"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabelaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaUsuariosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tabelaUsuarios);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -417,7 +325,6 @@ public class ClienteGUI extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -429,58 +336,12 @@ public class ClienteGUI extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void limpar() {
-        campoId.setText("");
-        campoNome.setText("");
-        campoRG.setText("");
-        campoCPF.setText("");
-        campoEmail.setText("");
-        campoTelefone.setText("");
-        radioFem.setSelected(false);
-        radioMasc.setSelected(false);
-    }
-
-    private void desabilitarCampos() {
-        campoNome.setEditable(false);
-        campoRG.setEditable(false);
-        campoCPF.setEditable(false);
-        campoEmail.setEditable(false);
-        campoTelefone.setEditable(false);
-        radioFem.setEnabled(false);
-        radioMasc.setEnabled(false);
-    }
-
-    private void preencherTabela() {
-        File f = arq.getF();
-        lista = arq.lerArquivo(f);
-        DefaultTableModel model = (DefaultTableModel) tabelaUsuarios.getModel();
-        model.setRowCount(0);
-        int t = 0;
-        while (t < lista.size()) {
-            model.addRow(lista.get(t).toString().split(";"));
-            t++;
-        }
-
-    }
-
-    private void habilitarCampos() {
-        campoNome.setEditable(true);
-        campoRG.setEditable(true);
-        campoCPF.setEditable(true);
-        campoEmail.setEditable(true);
-        campoTelefone.setEditable(true);
-        radioFem.setEnabled(true);
-        radioMasc.setEnabled(true);
-    }
 
     private boolean camposVazios() {
         boolean b = true;
@@ -489,18 +350,9 @@ public class ClienteGUI extends javax.swing.JDialog {
         }
         return b;
     }
-    private void editarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBTActionPerformed
-        // TODO add your handling code here:
-
-        habilitarCampos();   
-        salvarBT.setEnabled(true);
-        editarBT.setEnabled(false);
-    }//GEN-LAST:event_editarBTActionPerformed
-
     private void salvarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarBTActionPerformed
         // TODO add your handling code here:
-        File arquivo = arq.getF();
-        lista = arq.lerArquivo(arquivo);
+        
         String nome = campoNome.getText();
         String cpf = campoCPF.getText();
         String email = campoTelefone.getText();
@@ -515,91 +367,38 @@ public class ClienteGUI extends javax.swing.JDialog {
         }
 
         String telefone = campoTelefone.getText();
-       
-            if (!camposVazios()) {
-                JOptionPane.showMessageDialog(this, "Impossível salvar!\nHá campos vazios", "Falha", JOptionPane.ERROR_MESSAGE);
+        if (camposVazios()) {
+            c.setNome(nome);
+            c.setCpf(cpf);
+            c.setRg(rg);
+            c.setSexo(sexo);
+            c.setEmail(email);
+            c.setTelefone(telefone);
+
+            salvarBT.setEnabled(false);
+           
+
+            if (arq.novoDado(arquivo, c.toString())) {
+                JOptionPane.showMessageDialog(this, "Salvo", "Novo usuario", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                ListarClientesGUI.getInstance().setVisible(true);
             } else {
-                String idCliente = campoId.getText();
-                String clienteEditado = campoId.getText() + ";" + nome + ";" + cpf + ";" + rg + ";" + sexo + ";" + email + ";" + telefone;
-                lista = BufferCliente.editarCliente(lista, idCliente, clienteEditado);
-                if (arq.regravarDados(arquivo, lista)) {
-                    JOptionPane.showMessageDialog(this, "Editado", "Edição Salva", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Falha", "Edição Não salva", JOptionPane.ERROR_MESSAGE);
-                }
+                JOptionPane.showMessageDialog(this, "Falha", "Novo usuario", JOptionPane.ERROR_MESSAGE);
             }
+        } else {
 
-        
-        preencherTabela();
-        limpar();
-        desabilitarCampos();
-        cancelarBT.setEnabled(false);
-        salvarBT.setEnabled(false);
-       
-        removerBT.setEnabled(false);
-      
+            JOptionPane.showMessageDialog(this, "Impossível salvar!\nHá campos vazios", "Falha", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+
+
     }//GEN-LAST:event_salvarBTActionPerformed
-
-    private void cancelarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBTActionPerformed
-        // TODO add your handling code here:
-        id--;
-        cancelarBT.setEnabled(false);
-        
-        salvarBT.setEnabled(false);
-        editarBT.setEnabled(false);
-        removerBT.setEnabled(false);
-        limpar();
-        desabilitarCampos();
-    }//GEN-LAST:event_cancelarBTActionPerformed
 
     private void fecharBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharBTActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_fecharBTActionPerformed
-
-    private void tabelaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaUsuariosMouseClicked
-        // TODO add your handling code here:
-        try {
-            int linha = tabelaUsuarios.getSelectedRow();
-            campoId.setText(tabelaUsuarios.getValueAt(linha, 0).toString());
-            campoNome.setText(tabelaUsuarios.getValueAt(linha, 1).toString());
-            campoRG.setText(tabelaUsuarios.getValueAt(linha, 3).toString());
-            campoCPF.setText(tabelaUsuarios.getValueAt(linha, 2).toString());
-            campoEmail.setText(tabelaUsuarios.getValueAt(linha, 5).toString());
-            campoTelefone.setText(tabelaUsuarios.getValueAt(linha, 6).toString());
-            if ((tabelaUsuarios.getValueAt(linha, 4).toString()).charAt(0) == 'F') {
-                radioFem.setSelected(true);
-            } else {
-                radioMasc.setSelected(true);
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Há Campos Vazios neste Cliente", "Alerta", JOptionPane.WARNING_MESSAGE);
-        }
-
-        editarBT.setEnabled(true);
-        cancelarBT.setEnabled(true);
-        removerBT.setEnabled(true);
-    }//GEN-LAST:event_tabelaUsuariosMouseClicked
-
-    private void removerBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerBTActionPerformed
-        // TODO add your handling code here:
-        File f = arq.getF();
-        lista = arq.lerArquivo(f);
-
-        if (arq.regravarDados(f, BufferCliente.apagarCliente(lista, campoId.getText()))) {
-            preencherTabela();
-            removerBT.setEnabled(false);
-            JOptionPane.showMessageDialog(this, "Removeu", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
-
-        } else {
-            JOptionPane.showMessageDialog(this, "nao removeu", "nao deu certo", JOptionPane.ERROR_MESSAGE);
-        }
-        editarBT.setEnabled(false);
-        cancelarBT.setEnabled(false);
-        preencherTabela();
-        limpar();
-
-    }//GEN-LAST:event_removerBTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -618,20 +417,21 @@ public class ClienteGUI extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteNovoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteNovoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteNovoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteNovoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ClienteGUI dialog = new ClienteGUI(new javax.swing.JFrame(), true);
+                ClienteNovoGUI dialog = new ClienteNovoGUI(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -650,8 +450,6 @@ public class ClienteGUI extends javax.swing.JDialog {
     private javax.swing.JTextField campoNome;
     private javax.swing.JTextField campoRG;
     private javax.swing.JFormattedTextField campoTelefone;
-    private javax.swing.JButton cancelarBT;
-    private javax.swing.JButton editarBT;
     private javax.swing.JButton fecharBT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -666,13 +464,9 @@ public class ClienteGUI extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.ButtonGroup opcaoBotaoGrupo;
     private javax.swing.JRadioButton radioFem;
     private javax.swing.JRadioButton radioMasc;
-    private javax.swing.JButton removerBT;
     private javax.swing.JButton salvarBT;
-    private javax.swing.JTable tabelaUsuarios;
     // End of variables declaration//GEN-END:variables
 }
